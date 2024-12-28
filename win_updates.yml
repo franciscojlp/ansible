@@ -1,0 +1,15 @@
+- name: Windows rooling  update
+  hosts: win
+  tasks:
+    - name: Create Directory
+      ansible.windows.win_file:
+        path: C:\Install
+        state: directory
+    - name: Install all critical and security updates
+      ansible.windows.win_updates:
+        category_names:
+          - CriticalUpdates
+          - SecurityUpdates
+        state: installed
+        reboot: true
+        log_path: C:\Install\WindowsUpdates.txt
